@@ -186,16 +186,16 @@
 // Если пользователю меньше 18 - права не выдаем
 // Если больше 18 - права выдаем
 
-const userAnswer = prompt('Укажите пожалуйста ваш возраст')
-const userAge = Number(userAnswer)
-// userAge = NaN
+// const userAnswer = prompt('Укажите пожалуйста ваш возраст')
+// const userAge = Number(userAnswer)
+// // userAge = NaN
 
-if (isNaN(userAge)) { // isNaN(NaN) = true
-    alert('Вы ввели неправильные данные!')
-}
-else if (userAge >= 18) { // 17 > 18 = false
-    alert('Вы можете получить права!')
-}
-else {
-    alert('Вам нет 18. Права не могу выдать')
-}
+// if (isNaN(userAge)) { // isNaN(NaN) = true
+//     alert('Вы ввели неправильные данные!')
+// }
+// else if (userAge >= 18) { // 17 > 18 = false
+//     alert('Вы можете получить права!')
+// }
+// else {
+//     alert('Вам нет 18. Права не могу выдать')
+// }
