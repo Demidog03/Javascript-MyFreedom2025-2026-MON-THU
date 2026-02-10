@@ -143,30 +143,30 @@
 // Задача
 // Нужно создать функцию которая принимает 2 значения и выдает в консоль их сумму
 
-function sumTwoNumbers(num1, num2) {
-    if (arguments.length > 2) {
-        console.log('Че ты задаешь больше 2 аргументов???')
-    }
-    else if (arguments.length < 2) {
-        console.log('Некоторые параметры отсутсвуют')
-    }
-    else if (typeof num1 !== 'number' || typeof num2 !== 'number') {
-        console.log('Невалидные аргументы')
-    }
-    else {
-        console.log(num1 + num2)
-    }
-}
+// function sumTwoNumbers(num1, num2) {
+//     if (arguments.length > 2) {
+//         console.log('Че ты задаешь больше 2 аргументов???')
+//     }
+//     else if (arguments.length < 2) {
+//         console.log('Некоторые параметры отсутсвуют')
+//     }
+//     else if (typeof num1 !== 'number' || typeof num2 !== 'number') {
+//         console.log('Невалидные аргументы')
+//     }
+//     else {
+//         console.log(num1 + num2)
+//     }
+// }
 
-sumTwoNumbers(2, 2)
-sumTwoNumbers(5, 7)
-sumTwoNumbers('fds', true)
-sumTwoNumbers(2, true)
-sumTwoNumbers('fds', 2)
-sumTwoNumbers(2)
-sumTwoNumbers()
-sumTwoNumbers(5, 5, 5, 5)
-sumTwoNumbers(5, 5, 5)
+// sumTwoNumbers(2, 2)
+// sumTwoNumbers(5, 7)
+// sumTwoNumbers('fds', true)
+// sumTwoNumbers(2, true)
+// sumTwoNumbers('fds', 2)
+// sumTwoNumbers(2)
+// sumTwoNumbers()
+// sumTwoNumbers(5, 5, 5, 5)
+// sumTwoNumbers(5, 5, 5)
 
 // 1. Проверить аргументы функции на числа - typeof
 // Если sumTwoNumbers('fds', true) => console.log('Невалидные аргументы')
