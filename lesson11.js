@@ -114,7 +114,7 @@
 
 
 // ЗАДАНИЕ 2
-const dirtyUrl = "https://myshop.ru/archive/fdsfsd/old-iphone-15-pro/fdsfsdfsdfxcvcxvxc";
+const dirtyUrl = "https://myshop.ru/archive/fdsfsd/old-iphone-15-pro/hfghfjf";
 
 // У тебя есть «грязная» ссылка на категорию товара, которая пришла из старой системы.
 // Ожидаемый результат: "new iphone 15 pro max"
