@@ -400,45 +400,394 @@
 
 
 // 3. Полиморфизм (Polymorphism)
-class Employee {
-    constructor(name, baseSalary) {
-        this.name = name;
-        this.baseSalary = baseSalary;
-    }
+// class Employee {
+//     constructor(name, baseSalary) {
+//         this.name = name;
+//         this.baseSalary = baseSalary;
+//     }
 
-    showInfo() {
-        return `Сотрудник: ${this.name}. Базовая зарплата: ${this.baseSalary}.`
+//     showInfo() {
+//         return `Сотрудник: ${this.name}. Базовая зарплата: ${this.baseSalary}.`
+//     }
+// }
+
+// class Developer extends Employee {
+//     constructor(name, baseSalary, programmingLanguage) {
+//         super(name, baseSalary);
+//         this.programmingLanguage = programmingLanguage;
+//     }
+
+//     showInfo() {
+//         return super.showInfo() + " " + `Язык программирования: ${this.programmingLanguage}`
+//     }
+// }
+
+// class Manager extends Employee {
+//     constructor(name, baseSalary, salaryBonus) {
+//         super(name, baseSalary);
+//         this.salaryBonus = salaryBonus;
+//     }
+
+//     // Перезаписать метод showInfo() указав доп строку Зарплата с бонусами: salary + bonus
+//     showInfo() {
+//         return super.showInfo() + " " + `Зарплата с бонусами: ${this.baseSalary + this.salaryBonus}`
+//     }
+// }
+
+// const dev = new Developer('Алексей', 500_000, 'JavaScript');
+// const man = new Manager('Мария', 700_000, 100_000);
+
+// console.log(dev.showInfo());
+// console.log(man.showInfo());
+
+// console.log(dev);
+// console.log(man);
+
+
+// 4. Абстракция (Abstraction)
+
+// abstract class - надзиратель который будет ругаться если метод не реализован
+// class Bank {
+//     processPayment(amount) {
+//         throw new Error('Метод processPayment не реализован!')
+//     }
+// }
+
+// class KaspiBank extends Bank {
+//     processPayment(amount) {
+//         // какая то сложная логика оплаты
+//         console.log('Оплата по Каспи прошла успешно!')
+//     }
+// }
+
+// class FreedomBank extends Bank {
+//     processPayment() {
+//         // какая то сложная логика оплаты
+//         console.log('Оплата по Freedom прошла успешно!')
+//     }
+// }
+
+// class HalykBank extends Bank {
+//     processPayment() {
+//         // какая то сложная логика оплаты
+//         console.log('Оплата по Halyk прошла успешно!')
+//     }
+// }
+
+// class Store {
+//     pay(amount, bank) {
+//         bank.processPayment(amount)
+//     }
+// }
+
+// const kaspiBank = new KaspiBank()
+// const freedomBank = new FreedomBank()
+// const halykBank = new HalykBank()
+// const store = new Store()
+
+// store.pay(5000, halykBank)
+
+
+// Задача для тебя: «Универсальный транспорт»
+// Попробуй реализовать абстракцию для транспортной компании.
+
+// Создай класс Transport. У него должен быть метод deliver(package).
+
+// Создай два подкласса: Truck (Грузовик) и Ship (Корабль).
+
+// В Truck метод deliver должен писать: "Доставка [пакета] по дорогам на фуре".
+
+// В Ship метод deliver должен писать: "Доставка [пакета] по морю на контейнеровозе".
+
+// class Store -> sendOrder
+// Суть абстракции: Напиши функцию sendOrder(transport, item), 
+// которая просто вызывает метод deliver, не зная, поплывет заказ или поедет.
+
+// class Transport {
+//     deliver() {
+//         throw new Error('Метод deliver не реализован!')
+//     }
+// }
+
+// class Truck extends Transport {
+//     deliver(item) {
+//         console.log(`Доставка ${item} по дорогам на фуре`)
+//     }
+// }
+
+// class Ship extends Transport {
+//     deliver(item) {
+//         console.log(`Доставка ${item} по морю на контейнеровозе`)
+//     }
+// }
+
+// class LogisticsCompany {
+//     sendOrder(transport, item) {
+//         transport.deliver(item)
+//     }
+// }
+
+// const logisticsCompany = new LogisticsCompany()
+// const truck = new Truck()
+// const ship = new Ship()
+
+// logisticsCompany.sendOrder(truck, 'Наушники')
+// logisticsCompany.sendOrder(ship, 'Чехол')
+
+
+// SOLID
+
+// S - Single Responsibility Principle (Принцип единственной ответсвенности)
+
+// class User {
+//     constructor(name, email) {
+//         this.name = name
+//         this.email = email
+//     }
+
+//     validateEmail() {
+//         return this.email.includex('@')
+//     }
+
+//     saveToDatabase() {
+//         console.log(`Сохраняем пользователя ${this.name} в БД...`)
+//     }
+
+//     logInfo() {
+//         console.log(`Пользователь: ${this.name}, Email: ${this.email}`)
+//     }
+// }
+
+
+// class User {
+//     constructor(name, email) {
+//         this.name = name
+//         this.email = email
+//     }
+// }
+
+// class UserValidator {
+//     validateEmail(user) {
+//         return user.email.includes('@')
+//     }
+// }
+
+// class UserRepository {
+//     saveToDatabase(user) {
+//         console.log(`Сохраняем пользователя ${user.name} в БД...`)
+//     }
+// }
+
+// class Logger {
+//     log(message) {
+//         console.log(`[LOG]: ${message}`)
+//     }
+// }
+
+// const user = new User('Olzhas', 'olzhas@gmail.com')
+// const userValidator = new UserValidator()
+// const userRep = new UserRepository()
+// const logger = new Logger()
+
+// console.log(userValidator.validateEmail(user))
+// userRep.saveToDatabase(user)
+// logger.log(`Пользователь: ${user.name}, Email: ${user.email}`)
+
+
+// Задача: «Система обработки заказов»
+// Представь, что ты нашел в старом проекте класс OrderManager. Он работает, но нарушает SRP, 
+// потому что делает слишком много: считает цену, проверяет наличие товара и даже отправляет уведомления.
+
+// Твоя цель: Разделить этот «Божественный объект» на 3 независимых класса.
+// ❌ Плохой код (что нужно исправить):
+// JavaScript
+// class OrderManager {
+//   constructor(item, price, quantity) {
+//     this.item = item;
+//     this.price = price;
+//     this.quantity = quantity;
+//   }
+
+//   // 1. Логика расчета
+//   calculateTotal() {
+//     return this.price * this.quantity;
+//   }
+
+//   // 2. Логика работы с "базой данных" (складом)
+//   saveOrder() {
+//     console.log(`Заказ на ${this.item} сохранен в базу данных.`);
+//   }
+
+//   // 3. Логика уведомлений
+//   sendConfirmationEmail() {
+//     console.log(`Письмо: Ваш заказ на ${this.item} успешно оформлен!`);
+//   }
+// }
+// Что нужно сделать (Твое задание):
+// Создай три отдельных класса, каждый из которых отвечает за свою область:
+
+// Класс Order: должен только хранить данные о заказе (название, цена, количество)
+//  и иметь метод для расчета общей стоимости.
+
+// Класс OrderRepository: должен отвечать только за сохранение заказа (метод save).
+
+// Класс NotificationService: должен отвечать только за отправку сообщений (метод sendEmail).
+
+// Как проверить решение:
+// В конце напиши код, который связывает их вместе. Это должно выглядеть примерно так:
+
+// JavaScript
+// class Order {
+//     constructor(item, price, quantity) {
+//         this.item = item;
+//         this.price = price;
+//         this.quantity = quantity;
+//     }
+
+//     // 1. Логика расчета
+//     calculateTotal() {
+//         return this.price * this.quantity;
+//     }
+// }
+
+// class OrderRepository {
+//     // 2. Логика работы с "базой данных" (складом)
+//     save(order) {
+//         console.log(`Заказ на ${order.item} сохранен в базу данных.`);
+//     }
+// }
+
+// class NotificationService {
+//     // 3. Логика уведомлений
+//     sendEmail(order) {
+//         console.log(`Письмо: Ваш заказ на ${order.item} успешно оформлен!`);
+//     }
+// }
+
+// const myOrder = new Order("Клавиатура", 25000, 2);
+// const repository = new OrderRepository();
+// const messenger = new NotificationService();
+
+// repository.save(myOrder);
+// messenger.sendEmail(myOrder);
+
+// O - Open/Closed Principle (Принцип открытости/закрытости)
+class Discount {
+    getDiscountedPrice() {
+        throw new Error('Метод getDiscountedPrice не реализован!')
     }
 }
 
-class Developer extends Employee {
-    constructor(name, baseSalary, programmingLanguage) {
-        super(name, baseSalary);
-        this.programmingLanguage = programmingLanguage;
-    }
-
-    showInfo() {
-        return super.showInfo() + " " + `Язык программирования: ${this.programmingLanguage}`
+class SummerDiscount extends Discount {
+    getDiscountedPrice(price) {
+        return price * 0.9
     }
 }
 
-class Manager extends Employee {
-    constructor(name, baseSalary, salaryBonus) {
-        super(name, baseSalary);
-        this.salaryBonus = salaryBonus;
-    }
-
-    // Перезаписать метод showInfo() указав доп строку Зарплата с бонусами: salary + bonus
-    showInfo() {
-        return super.showInfo() + " " + `Зарплата с бонусами: ${this.baseSalary + this.salaryBonus}`
+class WinterDiscount extends Discount {
+    getDiscountedPrice(price) {
+        return price * 0.7
     }
 }
 
-const dev = new Developer('Алексей', 500_000, 'JavaScript');
-const man = new Manager('Мария', 700_000, 100_000);
+class WomansDayDiscount extends Discount {
+    getDiscountedPrice(price) {
+        return price * 0.5
+    }
+}
 
-console.log(dev.showInfo());
-console.log(man.showInfo());
+class BlackFridayDiscount extends Discount {
+    getDiscountedPrice(price) {
+        return price * 0.3
+    }
+}
 
-console.log(dev);
-console.log(man);
+class DiscountCalculator extends Discount {
+    calculate(price, discount) {
+        return discount.getDiscountedPrice(price)
+    }
+}
+
+const summerDiscount = new SummerDiscount()
+const winterDiscount = new WinterDiscount()
+const womansDayDiscount = new WomansDayDiscount()
+const blackFridayDiscount = new BlackFridayDiscount()
+
+const discountCalculator = new DiscountCalculator()
+console.log(discountCalculator.calculate(20000, summerDiscount))
+console.log(discountCalculator.calculate(20000, winterDiscount))
+console.log(discountCalculator.calculate(20000, womansDayDiscount))
+console.log(discountCalculator.calculate(20000, blackFridayDiscount))
+
+// Задача: «Универсальный экспортер»
+// Представь, что ты пишешь модуль для админ-панели.
+//  Тебе нужно выгружать данные в разных форматах. 
+//  Сейчас система поддерживает только PDF и JSON, но завтра заказчик может попросить Excel, CSV или HTML.
+
+// ❌ Плохой код (что нужно исправить):
+// Этот класс нарушает OCP, потому что каждый раз,
+//  когда появляется новый формат, нам нужно открывать этот файл и добавлять новый else if.
+
+// JavaScript
+// class ReportExporter {
+//   export(data, format) {
+//     if (format === 'PDF') {
+//       return `Данные [${data}] оформлены как PDF-файл`;
+//     } else if (format === 'JSON') {
+//       return JSON.stringify({ data: data });
+//     }
+//     // Если нужно добавить CSV, придется менять код внутри этого метода!
+//     return data;
+//   }
+// }
+// Что нужно сделать (Твое задание):
+// Переделай эту систему так, чтобы она была закрыта для изменений, но открыта для расширения.
+
+// Создай базовый класс Formatter. В нем должен быть метод format(data),
+//  который по умолчанию выбрасывает ошибку (или просто возвращает данные).
+
+// Создай два подкласса: PdfFormatter и JsonFormatter. 
+// Каждый из них должен реализовывать свой способ форматирования.
+
+// Измени класс ReportExporter. Теперь его метод export должен принимать не строку 'PDF', а объект форматировщика.
+
+
+class Formatter {
+    format() {
+        throw new Error('Метод format не реализован!')
+    }
+}
+
+class PdfFormatter extends Formatter {
+    format(data) {
+        console.log(`Данные [${data}] оформлены как PDF-файл`)
+    }
+}
+
+class JsonFormatter extends Formatter {
+    format(data) {
+        console.log(JSON.stringify({ data: data }))
+    }
+}
+
+class CSVFormatter extends Formatter {
+    format(data) {
+        console.log(`Данные [${data}] оформлены как CSV-файл`)
+    }
+}
+
+class ReportExporter {
+    export(data, formatter) {
+        formatter.format(data)
+    }
+}
+
+const pdfFormatter = new PdfFormatter()
+const jsonFormatter = new JsonFormatter()
+const csvFormatter = new CSVFormatter()
+
+const reportExporter = new ReportExporter()
+
+reportExporter.export({ name: 'Olzhas' }, pdfFormatter)
+reportExporter.export({ name: 'Olzhas' }, jsonFormatter)
+reportExporter.export({ name: 'Olzhas' }, csvFormatter)
