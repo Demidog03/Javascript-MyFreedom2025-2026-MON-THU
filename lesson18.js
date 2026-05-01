@@ -672,52 +672,52 @@
 // messenger.sendEmail(myOrder);
 
 // O - Open/Closed Principle (Принцип открытости/закрытости)
-class Discount {
-    getDiscountedPrice() {
-        throw new Error('Метод getDiscountedPrice не реализован!')
-    }
-}
+// class Discount {
+//     getDiscountedPrice() {
+//         throw new Error('Метод getDiscountedPrice не реализован!')
+//     }
+// }
 
-class SummerDiscount extends Discount {
-    getDiscountedPrice(price) {
-        return price * 0.9
-    }
-}
+// class SummerDiscount extends Discount {
+//     getDiscountedPrice(price) {
+//         return price * 0.9
+//     }
+// }
 
-class WinterDiscount extends Discount {
-    getDiscountedPrice(price) {
-        return price * 0.7
-    }
-}
+// class WinterDiscount extends Discount {
+//     getDiscountedPrice(price) {
+//         return price * 0.7
+//     }
+// }
 
-class WomansDayDiscount extends Discount {
-    getDiscountedPrice(price) {
-        return price * 0.5
-    }
-}
+// class WomansDayDiscount extends Discount {
+//     getDiscountedPrice(price) {
+//         return price * 0.5
+//     }
+// }
 
-class BlackFridayDiscount extends Discount {
-    getDiscountedPrice(price) {
-        return price * 0.3
-    }
-}
+// class BlackFridayDiscount extends Discount {
+//     getDiscountedPrice(price) {
+//         return price * 0.3
+//     }
+// }
 
-class DiscountCalculator extends Discount {
-    calculate(price, discount) {
-        return discount.getDiscountedPrice(price)
-    }
-}
+// class DiscountCalculator extends Discount {
+//     calculate(price, discount) {
+//         return discount.getDiscountedPrice(price)
+//     }
+// }
 
-const summerDiscount = new SummerDiscount()
-const winterDiscount = new WinterDiscount()
-const womansDayDiscount = new WomansDayDiscount()
-const blackFridayDiscount = new BlackFridayDiscount()
+// const summerDiscount = new SummerDiscount()
+// const winterDiscount = new WinterDiscount()
+// const womansDayDiscount = new WomansDayDiscount()
+// const blackFridayDiscount = new BlackFridayDiscount()
 
-const discountCalculator = new DiscountCalculator()
-console.log(discountCalculator.calculate(20000, summerDiscount))
-console.log(discountCalculator.calculate(20000, winterDiscount))
-console.log(discountCalculator.calculate(20000, womansDayDiscount))
-console.log(discountCalculator.calculate(20000, blackFridayDiscount))
+// const discountCalculator = new DiscountCalculator()
+// console.log(discountCalculator.calculate(20000, summerDiscount))
+// console.log(discountCalculator.calculate(20000, winterDiscount))
+// console.log(discountCalculator.calculate(20000, womansDayDiscount))
+// console.log(discountCalculator.calculate(20000, blackFridayDiscount))
 
 // Задача: «Универсальный экспортер»
 // Представь, что ты пишешь модуль для админ-панели.
@@ -752,42 +752,278 @@ console.log(discountCalculator.calculate(20000, blackFridayDiscount))
 // Измени класс ReportExporter. Теперь его метод export должен принимать не строку 'PDF', а объект форматировщика.
 
 
-class Formatter {
-    format() {
-        throw new Error('Метод format не реализован!')
+// class Formatter {
+//     format() {
+//         throw new Error('Метод format не реализован!')
+//     }
+// }
+
+// class PdfFormatter extends Formatter {
+//     format(data) {
+//         console.log(`Данные [${data}] оформлены как PDF-файл`)
+//     }
+// }
+
+// class JsonFormatter extends Formatter {
+//     format(data) {
+//         console.log(JSON.stringify({ data: data }))
+//     }
+// }
+
+// class CSVFormatter extends Formatter {
+//     format(data) {
+//         console.log(`Данные [${data}] оформлены как CSV-файл`)
+//     }
+// }
+
+// class ReportExporter {
+//     export(data, formatter) {
+//         formatter.format(data)
+//     }
+// }
+
+// const pdfFormatter = new PdfFormatter()
+// const jsonFormatter = new JsonFormatter()
+// const csvFormatter = new CSVFormatter()
+
+// const reportExporter = new ReportExporter()
+
+// reportExporter.export({ name: 'Olzhas' }, pdfFormatter)
+// reportExporter.export({ name: 'Olzhas' }, jsonFormatter)
+// reportExporter.export({ name: 'Olzhas' }, csvFormatter)
+
+
+// L - Liskov substitution principle
+
+// class Bird {
+//     fly() {
+//         console.log('Я лечу!')
+//     }
+// }
+
+// class Eagle extends Bird {}
+
+// const eagle = new Eagle()
+// eagle.fly()
+
+// class Penguin extends Bird {}
+
+// class Bird {
+//     eat() {
+//         console.log('Я ем!')
+//     }
+// }
+
+// class FlyingBird extends Bird {
+//     fly() {
+//         console.log('Я лечу!')
+//     }
+// }
+
+// class Eagle extends FlyingBird {}
+
+// const eagle = new Eagle()
+// eagle.fly()
+
+// class Penguin extends Bird {}
+
+
+// class Document {
+//     constructor(title) {
+//         this.title = title
+//     }
+
+//     read() {
+//         console.log(`Чтение документа: ${this.title}`)
+//     }
+// }
+
+// class WritableDocument extends Document {
+//     save() {
+//         console.log(`Документ ${this.title} сохранен`)
+//     }
+// }
+
+// class ExcelDocument extends WritableDocument {
+//     constructor() {
+//         super('Excel (XLSX)')
+//     }
+// }
+
+// class ReadOnlyExcelDocument extends Document {
+//     constructor() {
+//         super('Readonly Excel (XLSX)')
+//     }
+// }
+
+// const excelDoc = new ReadOnlyExcelDocument()
+// excelDoc.read()
+// excelDoc.save()
+
+// Задача: «Умный дом и устройства»
+// Представь, что ты разрабатываешь систему управления умным домом.
+//  У тебя есть разные устройства: лампочки, термостаты и музыкальные колонки.
+
+// ❌ Плохой код (Нарушение LSP):
+// Проблема здесь в том, что базовый класс SmartDevice заставляет все устройства
+//  иметь метод «изменения громкости», хотя у лампочки нет динамиков.
+// class SmartDevice {
+//   turnOn() {
+//     console.log("Устройство включено");
+//   }
+
+//   // Нарушение: не у каждого устройства есть звук!
+//   setVolume(level) {
+//     console.log(`Громкость установлена на ${level}`);
+//   }
+// }
+
+// class Speaker extends SmartDevice {
+//   // Тут всё ок, колонка умеет менять громкость
+// }
+
+// class LightBulb extends SmartDevice {
+//   setVolume(level) {
+//     // Лампочка не умеет издавать звук. 
+//     // Нам приходится либо кидать ошибку, либо писать "пустой" код.
+//     throw new Error("Ошибка! У лампочки нет звука!");
+//   }
+// }
+
+// // Проблема: эта функция ожидает, что у ЛЮБОГО устройства можно менять громкость
+// function setupPartyMode(devices) {
+//   devices.forEach(device => {
+//     device.turnOn();
+//     device.setVolume(50); // ТУТ ВСЁ УПАДЕТ, если попадется лампочка
+//   });
+// }
+
+// Что нужно сделать (Твое задание):
+// Твоя задача — провести рефакторинг, чтобы соблюсти принцип Лисков. 
+// Нужно разделить устройства так, чтобы функция «настройки звука» 
+// работала только с теми, кто это поддерживает.
+
+// Создай базовый класс SmartDevice. Оставь в нем только то, что есть у всех (например, метод turnOn).
+
+// Создай промежуточный класс SoundDevice, который наследует SmartDevice и добавляет метод setVolume.
+
+// Переделай классы устройств:
+
+// Speaker (Колонка) должен наследоваться от SoundDevice.
+
+// LightBulb (Лампочка) должен наследоваться напрямую от SmartDevice.
+
+// class SmartDevice {
+//     turnOn() {
+//         console.log("Устройство включено");
+//     }
+// }
+
+// class SoundDevice extends SmartDevice {
+//     setVolume(level) {
+//         console.log(`Громкость установлена на ${level}`);
+//     }
+// }
+
+// const speaker = new SoundDevice()
+// const lightBulb = new SmartDevice()
+
+// speaker.setVolume()
+// speaker.turnOn()
+
+// lightBulb.turnOn()
+
+
+// I - Interface Segregation Principle
+
+// D - Dependency Inversion Principle - Прицип инверсии зависимостей
+
+class Payment {
+    makePayment() {
+        throw new Error('Метод makePayment не реализован!')
     }
 }
 
-class PdfFormatter extends Formatter {
-    format(data) {
-        console.log(`Данные [${data}] оформлены как PDF-файл`)
+class KaspiPay extends Payment {
+    makePayment(amount) {
+        console.log(`Оплата ${amount} через Каспи`)
     }
 }
 
-class JsonFormatter extends Formatter {
-    format(data) {
-        console.log(JSON.stringify({ data: data }))
+class HalykPay extends Payment {
+    makePayment(amount) {
+        console.log(`Оплата ${amount} через Halyk`)
     }
 }
 
-class CSVFormatter extends Formatter {
-    format(data) {
-        console.log(`Данные [${data}] оформлены как CSV-файл`)
+class Store {
+    constructor(payment) {
+        this.paymentProcessor = payment
+    }
+
+    purchase(amount) {
+        this.paymentProcessor.makePayment(amount)
+    }
+}
+const kaspiPay = new KaspiPay()
+const halykPay = new HalykPay()
+
+const store = new Store(kaspiPay)
+const store2 = new Store(halykPay)
+store.purchase(20_000)
+store.purchase(20_000)
+
+
+// Задача: «Система уведомлений»
+// Представь, что у тебя есть класс App, который отправляет пользователю важные новости. 
+// Сейчас он умеет отправлять только Email.
+
+// Твое задание:
+
+// Создай классы EmailProvider и SmsProvider. У каждого должен быть метод send(message).
+
+// Создай класс App, который не создает провайдера внутри себя, а принимает его в constructor.
+
+// Напиши метод в App, который отправляет сообщение через тот провайдер, который ему дали.
+
+// Цель: Сделать так, чтобы ты мог создать new App(new EmailProvider())
+//  или new App(new SmsProvider()), не меняя ни одной строчки кода внутри класса App.
+
+class MessageProvider {
+    send() {
+        throw new Error('Метод send не реализован!')
     }
 }
 
-class ReportExporter {
-    export(data, formatter) {
-        formatter.format(data)
+class EmailProvider extends MessageProvider {
+    send(message) {
+        console.log(`Отправка сообщения по email: ${message}`)
     }
 }
 
-const pdfFormatter = new PdfFormatter()
-const jsonFormatter = new JsonFormatter()
-const csvFormatter = new CSVFormatter()
+class SmsProvider extends MessageProvider {
+    send(message) {
+        console.log(`Отправка сообщения по sms: ${message}`)
+    }
+}
 
-const reportExporter = new ReportExporter()
+class App {
+    #messageProvider
 
-reportExporter.export({ name: 'Olzhas' }, pdfFormatter)
-reportExporter.export({ name: 'Olzhas' }, jsonFormatter)
-reportExporter.export({ name: 'Olzhas' }, csvFormatter)
+    constructor(messageProvider) {
+        this.#messageProvider = messageProvider
+    }
+
+    sendNotification(message) {
+        this.#messageProvider.send(message)
+    }
+}
+
+const emailProvider = new EmailProvider()
+const smsProvider = new SmsProvider()
+
+const app1 = new App(emailProvider)
+const app2 = new App(smsProvider)
+
+app1.sendNotification('Привет')
+app2.sendNotification('Пока')
